@@ -102,13 +102,13 @@ MAT focuses on the health of the following pillars:
 6. REFERENCES & DOCUMENTATION
 --------------------------------------------------------------------------------
 ** Microsoft SKU & Service Plan Reference:
-  https://learn.microsoft.com/en-us/entra/identity/users/licensing-service-plan-reference
+*https://learn.microsoft.com/en-us/entra/identity/users/licensing-service-plan-reference
 
 ** Microsoft Incident Response Team (M365 Artifacts):
-  https://go.microsoft.com/fwlink/?linkid=2257423
+*https://go.microsoft.com/fwlink/?linkid=2257423
 
 ** Microsoft licence matrix
-https://m365maps.com/matrix.htm#000000000000000000000
+*https://m365maps.com/matrix.htm#000000000000000000000
 
 --------------------------------------------------------------------------------
 [#] OUTPUTS

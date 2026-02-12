@@ -1,4 +1,4 @@
-# MICROSOFT AUDIT TRACKER (MAT)
+# MICROSOFT-AUDIT-TRACKER (MAT)
 Cloud Response & Auditing Utility
 
 Version: 1.0

@@ -91,11 +91,18 @@ To ensure full operational capability, the executing account should hold:
 5. CLOUD IR PREPAREDNESS & SECURITY PILLARS
 --------------------------------------------------------------------------------
 MAT focuses on the health of the following pillars:
+Unified Audit Log (UAL):
 
-* Unified Audit Log (UAL): Central repository for M365 actions.
-* Mailbox Auditing: Essential for detecting BEC.
-* Audit Retention: Identifies if logs are stored beyond the 90-day default.
-* Identity Guardrails: Checks status of Security Defaults and CA Policies.
+Verifies that Unified Audit Log ingestion is enabled and reviewing Admin Audit Log retention settings. This ensures Microsoft 365 activity and administrative changes are recorded and available for investigation.
+Entra ID Diagnostic Logging:
+
+Checks whether Entra ID (Azure AD) diagnostic logs are exported to Azure Monitor / Log Analytics. Without export, sign-in and audit logs expire within the default 7–30 day window, limiting identity-based investigations.
+Azure Activity Log Export:
+
+Validates whether Azure subscription activity logs are exported beyond the default 90-day retention. This preserves evidence of infrastructure-level changes such as VM deletion, networking modifications, and role assignments.
+Mailbox Auditing:
+
+Confirms mailbox auditing is enabled at the organization level. This is critical for detecting Business Email Compromise (BEC) activity, including mailbox access and message tampering events.
 
 --------------------------------------------------------------------------------
 6. REFERENCES & DOCUMENTATION

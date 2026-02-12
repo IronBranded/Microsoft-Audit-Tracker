@@ -82,7 +82,7 @@ or Security Administrator (Required for most 'Auditor' functions).
 
 [3] LICENSOR MODE  : SKU Inventory. Translates technical IDs into human-readable names.
 
-[4] SUPER AUDITOR  : Full-Spectrum Capture. Runs Modes 1, 2, and 3 sequentially.
+[4] SUPER AUDITOR  : Full-Spectrum Capture. Runs Modes 1, 2, and 3 sequentially. (Generates a HTML report.)
 
 [5] ACTIVATOR MODE : Remediation. Enables Unified Audit Logging (UAL) if found 
                      disabled. Requires 'ENABLE-UAL' confirmation.

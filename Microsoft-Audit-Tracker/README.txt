@@ -66,8 +66,8 @@ REQUIREMENTS:
 --------------------------------------------------------------------------------
 To ensure full operational capability, the executing account should hold:
 
-* M365 Roles: Global Administrator (Required for 'Activator' mode) or 
-              Security Administrator (Required for most 'Auditor' functions).
+* M365 Roles: Global Administrator / Compliance Administrator (Required for 'Activator' mode) 
+or Security Administrator (Required for most 'Auditor' functions).
 * Azure Roles: Reader (at Root/Subscription level) to inventory Defender status.
 * Minimum Rights: At a minimum, 'Security Reader' and 'Global Reader' allow 
                   for read-only assessments (Options 1, 2, and 3).

@@ -7,7 +7,7 @@
 ================================================================================
 
 [!] LEGAL DISCLAIMER & MANDATORY CONSENT
-----------------------------------------
+-----------------------------------------
 This tool is provided for professional security auditing and Incident Response
 purposes only. Use of the Microsoft Audit Tracker (MAT) MUST be conducted ONLY
 after obtaining EXPLICIT WRITTEN CONSENT from the Tenant Owners and Authorized 

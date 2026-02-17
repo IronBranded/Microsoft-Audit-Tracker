@@ -46,6 +46,13 @@ REQUIREMENTS:
 * Windows: PowerShell 5.1 or PowerShell 7+
 * macOS: PowerShell 7+ (pwsh) must be installed.
 
+Open PowerShell as Administrator and run:
+
+    Install-Module Microsoft.Graph.Authentication -Force
+    Install-Module ExchangeOnlineManagement -Force
+    Install-Module Az.Accounts -Force
+
+
 --- STARTING THE TOOL (WINDOWS) ---
 1. Open PowerShell as Administrator.
 2. Navigate to the folder:

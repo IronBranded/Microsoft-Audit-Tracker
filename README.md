@@ -32,7 +32,7 @@ consequences resulting from the use of this tool.
 --------------------------------------------------------------------------------
 1. TOOL DESCRIPTION & IR RELEVANCE
 --------------------------------------------------------------------------------
-Microsoft Audit Tracker (MAT) identifies the "Forensic Footprint" capabilities
+Microsoft Audit Tracker (MAT) identifies the "Forensic Footprint" capabilities and
 determines if the tenant's current configuration is actually recording that evidence. 
 
 The tool provides a unified view to determine if the appropriate logs and 

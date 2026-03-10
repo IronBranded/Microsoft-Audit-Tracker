@@ -39,6 +39,11 @@ The tool provides a unified view to determine if the appropriate logs and
 other relevant security pillars within the Microsoft Cloud solution stack 
 and defensive stack are active. 
 
+<img width="553" height="324" alt="Screenshot 2026-03-10 at 8 38 14 AM" src="https://github.com/user-attachments/assets/c01a599c-6e3c-4c29-b0c5-b57d32ce29ff" />
+
+
+
+
 --------------------------------------------------------------------------------
 2. HOW TO USE
 --------------------------------------------------------------------------------

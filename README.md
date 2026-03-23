@@ -230,7 +230,7 @@ if UAL is off or if Copilot email access logging (MailItemsAccessed) is not capt
 
 ---
 
-## 9. CLOUD IR PREPAREDNESS & SECURITY PILLARS
+## CLOUD DFIR PREPAREDNESS & SECURITY PILLARS
 
 ### Unified Audit Log (UAL)
 Verifies UAL ingestion is enabled. Without it, there is zero visibility into M365 file,
@@ -268,7 +268,7 @@ Detects permanent Global Administrator assignments with no PIM eligibility sched
 flagging tenants where GA access is always-on rather than time-bound.
 
 ### Microsoft 365 Copilot AI Governance
-See Section 8 above.
+See Section "COPILOT AI AUDIT INTEGRATION" for details.
 
 ---
 

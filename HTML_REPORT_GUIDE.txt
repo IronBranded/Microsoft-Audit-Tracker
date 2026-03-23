@@ -1,0 +1,322 @@
+================================================================================
+  EXECUTIVE HTML REPORT - FEATURE DOCUMENTATION
+  Microsoft Audit Tracker (MAT) v1.2 - Super Auditor Mode
+================================================================================
+
+OVERVIEW
+================================================================================
+
+The Super Auditor mode automatically generates a comprehensive executive HTML
+dashboard that consolidates all audit findings into a single, professional
+report with:
+
+✓ Modern dark-themed design (GitHub-inspired)
+✓ Color-coded findings (Critical / Warning / Healthy)
+✓ Interactive statistics dashboard with stacked health bar
+✓ Per-section issue badges (red = critical, amber = warnings, green = clean)
+✓ Filter bar — real-time row filtering across all tables
+✓ Collapsible sections with chevron toggle
+✓ Sticky navigation bar with Print / PDF button
+✓ Key Findings panel — critical items extracted at the top
+✓ Row-level severity highlighting (red border + tint / amber border + tint)
+✓ Responsive layout (works on all devices)
+✓ CONFIDENTIAL diagonal watermark on Print / PDF output
+✓ Section 5: Consolidated Microsoft 365 Copilot AI Audit
+
+================================================================================
+DIRECTORY STRUCTURE (REQUIRED)
+================================================================================
+
+All module files must exist in the following folder layout relative to
+Start-MAT.ps1.  This is the structure used by GitHub releases.
+
+  MicrosoftAuditTracker/
+  ├── Start-MAT.ps1                 ← Entry point
+  ├── Core/
+  │   ├── MAT_State.ps1             ← Global state + SKU cache helper
+  │   ├── MAT_Logging.ps1           ← Operator audit trail (non-repudiation)
+  │   ├── MAT_Paths.ps1             ← Cross-platform report/log path resolution
+  │   └── MAT_Connection.ps1       ← Authentication + session management
+  ├── Data/
+  │   └── LicenseMap.ps1            ← SKU + Defender service-plan reference data
+  ├── UI/
+  │   └── MAT_UI_Engine.ps1         ← Console header and menu loop
+  └── Operations/
+      ├── Auditor.ps1               ← Mode 1 — Forensic Health Check
+      ├── Protector.ps1             ← Mode 2 — Identity & Posture Check
+      ├── Licensor.ps1              ← Mode 3 — Defensive Stack & License Inventory
+      ├── Activator.ps1             ← Mode 5 — UAL remediation
+      ├── Diagnostic.ps1            ← [D] — Environment diagnostic check
+      └── SuperAuditor.ps1          ← Mode 4 — Full-spectrum audit + HTML report
+
+If any Core module is absent, MAT will print the expected path and exit.
+Start-MAT.ps1 resolves all module paths from its own directory ($PSScriptRoot).
+
+================================================================================
+DASHBOARD HEADER
+================================================================================
+
+When the tool loads the main menu, the header displays:
+
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║  Microsoft Audit Tracker - Cloud Response & Auditing Utility            ║
+  ╠══════════════════════════════════════════════════════════════════════════╣
+  ║   TENANT : <TenantDisplayName>         STATUS : Connected / Disconnected ║
+  ║   USER   : <UserPrincipalName>                                           ║
+  ║   M365   : <HighestActiveRole>         MODE   : DASHBOARD                ║
+  ║   AZURE  : <AzureRole>                 TIME   : HH:mm:ss                 ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+
+Fields:
+  TENANT — Display name from Get-MgOrganization. Shows DISCONNECTED until [C].
+  USER   — UPN of the authenticated account ($ctx.Account).
+  M365   — Highest active M365 role detected via Get-MgUserMemberOf.
+           Shows "Not Authenticated" before [C].
+  AZURE  — Highest Azure RBAC role found via Get-AzRoleAssignment.
+           Shows "Not Checked" before [C] or if Az.Accounts not installed.
+  STATUS — Connected (green) / Partial (yellow) / Disconnected (red).
+  MODE   — Always "DASHBOARD" on the main menu.
+  TIME   — Live local time, refreshed each menu iteration.
+
+================================================================================
+WHAT'S INCLUDED IN THE HTML REPORT
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SECTION 1: Forensic Health Check (Auditor Mode)                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+• Unified Audit Log (UAL) status and retention evaluation (90-day threshold)
+• Entra ID diagnostic logging (category validation — not just existence)
+• Azure Activity Log export (current subscription)
+• Mailbox auditing status and retention
+• External auto-forwarding policy (primary BEC exfiltration gate)
+• Copilot AI telemetry (UAL event capture, Purview tier, email access logging)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SECTION 2: Identity & Posture Check (Protector Mode)                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+• Security Defaults status
+• Conditional Access policies — per-policy state (enforced / report-only / disabled)
+• CA MFA grant coverage count (BuiltInControls:mfa + AuthenticationStrength)
+• MFA enforcement correlation (Security Defaults + CA cross-check)
+• Legacy authentication block detection (exchangeActiveSync / other)
+• PIM standing Global Administrator access
+• Security service plan inventory
+• Copilot data governance (MIP licensing + MFA enforcement correlation)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SECTION 3: Defensive Stack Analysis (Licensor Mode)                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+• Microsoft Defender for Endpoint (Plan 1 / Plan 2)
+• Microsoft Defender for Office 365 (Plan 1 / Plan 2)
+• Microsoft Defender for Identity
+• Microsoft Defender for Cloud Apps
+• Microsoft Defender XDR
+• Microsoft Defender for IoT
+• Microsoft Sentinel
+• Not-licensed placeholders for every required solution
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SECTION 4: License & SKU Inventory (Licensor Mode)                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+• All M365 SKUs with Total / Consumed / Unused seat counts
+• Enterprise, Business, Frontline, Education, Government SKUs
+• Over-consumption flagged as Warning; unused capacity flagged as Optimizable
+• Copilot standalone and bundled license detection + utilisation percentage
+• Copilot expiry warning rows when PrepaidUnits.Warning > 0
+• Copilot usage summary via Graph Reports API (requires Reports.Read.All)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SECTION 5: Microsoft 365 Copilot AI Audit (consolidated)                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+Sub-tables pulling from the three modes above — zero extra file reads:
+  • Forensic Telemetry  — filtered from Auditor data   (Category = "Copilot")
+  • Data Governance     — filtered from Protector data (Type = "Copilot")
+  • License Deployment  — filtered from Licensor data  (License_Name like "*Copilot*")
+
+================================================================================
+STATISTICS CARD
+================================================================================
+
+The top stats grid shows:
+
+  Target Tenant   | Auditor Principal | Audit Timestamp | Total Checks
+  ─────────────────────────────────────────────────────────────────────
+  Contoso Corp    | admin@contoso.com | 2026-03-23 ...  | 47 total
+                                                          🔴 Critical: 3
+                                                          🟡 Warnings: 12
+                                                          🟢 Healthy:  32
+                                                          ▓▓░░░░░░░░░░ (health bar)
+
+The stacked health bar (red / amber / green) gives an instant visual ratio of
+critical : warning : healthy findings without reading individual counts.
+
+================================================================================
+INTERACTIVE FEATURES (BROWSER)
+================================================================================
+
+NAV BAR (sticky, top of page):
+  • Jump links to each section (1 – 5)
+  • Per-section badge — red "N critical" / amber "N warnings" / green "clean"
+  • Filter input — type to hide non-matching rows across all tables instantly
+  • Print / PDF button — calls window.print()
+  • Active section highlighted via IntersectionObserver as you scroll
+
+SECTIONS:
+  • Click any section header to collapse / expand it (chevron rotates)
+  • All sections start expanded
+
+TABLES:
+  • Sticky column headers (stay visible while scrolling long tables)
+  • Critical rows: red left border + subtle red tint
+  • Warning rows:  amber left border + subtle amber tint
+  • Zebra striping on all other rows
+  • Hover highlight
+
+PRINT / PDF (File → Print → Save as PDF or nav Print button):
+  • Nav bar hidden
+  • All sections forced expanded
+  • Headers un-stickied
+  • CONFIDENTIAL diagonal watermark rendered via CSS ::before pseudo-element
+  • Black-and-white optimised colour palette
+
+================================================================================
+HOW TO GENERATE THE REPORT
+================================================================================
+
+METHOD 1: Super Auditor (Recommended)
+--------------------------------------
+1. Launch MAT:         pwsh .\Start-MAT.ps1   (or ./Start-MAT.ps1 on macOS)
+2. Connect to tenant:  Press [C]
+3. Run Super Auditor:  Press [4]
+4. Confirm execution when prompted
+5. Wait for all three modes to complete (~2–5 min depending on tenant size)
+6. HTML report is automatically generated and path displayed
+
+The report is saved as:
+  Downloads/MAT_Reports/<TenantName>/YYYY-MM-DD/MAT_Executive_Report_YYYYMMDD_HHMMSS.html
+
+METHOD 2: Manual (Advanced)
+-------------------------------
+If you have already run individual modes and have the four CSVs:
+  - Auditor_Report.csv
+  - Protector_Inventory.csv
+  - Defensive_Stack.csv
+  - Licenses_Inventory.csv
+
+Run in PowerShell (after loading all MAT modules):
+  $reportPath = "C:\Downloads\MAT_Reports\Contoso\2026-03-23"
+  $tenantName = "Contoso"
+  New-MATHtmlReport -ReportDirectory $reportPath -TenantName $tenantName
+
+================================================================================
+FILE LOCATIONS
+================================================================================
+
+Super Auditor creates this structure under your Downloads folder:
+
+  Downloads/MAT_Reports/
+  └── <TenantName>/
+      └── YYYY-MM-DD/
+          ├── Auditor_Report.csv
+          ├── Protector_Inventory.csv
+          ├── Defensive_Stack.csv
+          ├── Licenses_Inventory.csv
+          └── MAT_Executive_Report_YYYYMMDD_HHMMSS.html  ← Executive Dashboard
+
+Operational logs (non-repudiation audit trail):
+  Downloads/MAT_Reports/MAT_Operational_Logs/<date>_<tenant>_<mode>_OA.txt
+
+Multiple HTML reports can coexist in the same folder (timestamped filenames).
+
+================================================================================
+USE CASES
+================================================================================
+
+EXECUTIVE BRIEFINGS:
+  • Open HTML in any modern browser for a live interactive review
+  • Share your screen — filter bar lets you drill down in real time
+  • Print → Save as PDF for offline distribution (CONFIDENTIAL watermark applied)
+
+COMPLIANCE AUDITS:
+  • Professional documentation showing security posture assessment
+  • Evidence of controls checked with date/time/operator stamp
+  • Historical baseline for remediation tracking
+
+INCIDENT RESPONSE:
+  • Rapid snapshot of forensic blind spots (UAL off? Entra logs not exported?)
+  • Validates detection coverage before an IR engagement deepens
+  • Identifies BEC-enabling gaps (auto-forwarding, no MFA, no mailbox audit)
+
+CLIENT DELIVERABLES:
+  • Professional HTML output suitable for stakeholder review
+  • Clear Critical / Warning / Healthy colour language for non-technical audiences
+
+ONGOING MONITORING:
+  • Run Super Auditor monthly or quarterly
+  • Compare HTML reports to track remediation progress over time
+
+================================================================================
+TECHNICAL DETAILS
+================================================================================
+
+HTML GENERATION:
+  1. SuperAuditor calls Invoke-AuditorMode -Silent, Invoke-ProtectorMode -Silent,
+     and Invoke-LicensorMode -Silent in sequence — each writes its CSV.
+  2. New-MATHtmlReport performs a single-pass load (4 Import-Csv calls, not 12).
+  3. Copilot sub-sections are filtered from in-memory arrays — zero extra reads.
+  4. All statistics, badges, and the health bar are computed from in-memory data.
+  5. The HTML here-string is written to disk with UTF-8 encoding.
+
+SINGLE-PASS CSV LOADING:
+  Each CSV is loaded once into memory. The main tables AND the Copilot sub-tables
+  (Section 5) both read from the same in-memory arrays. This avoids 8 redundant
+  file reads compared to earlier versions.
+
+CONDITIONAL FORMATTING LOGIC:
+  Each table cell value is scanned for keywords before rendering:
+    Red    : CRITICAL, Fail, Failed, Error, Disabled, Not Found, Not Licensed, High Risk
+    Amber  : Warning, Medium, Review, Optimizable, Auth Limited, Inactive,
+             enabledForReportingButNotEnforced
+    Green  : Healthy, Success, Pass, Enabled, Licensed, Active, Connected, Low
+    Blue   : Info, Manual, Unknown, Not Available, Not Checked
+
+SKU CACHE:
+  Get-MATSkuData (MAT_State.ps1) caches the result of Get-MgSubscribedSku for
+  60 minutes. All three audit modes and the HTML generator share this cache —
+  only one Graph round-trip is needed per Super Auditor run.
+
+PERFORMANCE:
+  • HTML generation: 2–8 seconds (depends on finding count)
+  • HTML file size:  50–200 KB
+  • Browser render:  Instant (pure HTML/CSS/vanilla JS, no external dependencies)
+
+BROWSER COMPATIBILITY:
+  All modern browsers — Chrome, Edge, Firefox, Safari, mobile browsers.
+  IntersectionObserver (active nav highlight) degrades gracefully on older engines.
+
+================================================================================
+CUSTOMISATION
+================================================================================
+
+COLOURS (CSS custom properties in SuperAuditor.ps1 <style> block):
+  --pr : #58a6ff   Accent / primary (blue)
+  --cp : #a371f7   Copilot accent (purple)
+  --ok : #3fb950   Healthy / success (green)
+  --wn : #d29922   Warning (amber)
+  --er : #ff7b72   Critical / error (red)
+  --bg : #0d1117   Page background
+  --cd : #161b22   Card / section background
+  --tx : #c9d1d9   Body text
+  --bd : #30363d   Borders
+  --hb : #21262d   Header / nav background
+
+SECTION DESCRIPTIONS:
+  Edit the .sdesc <div> text inside the $html here-string in SuperAuditor.ps1
+  to customise what appears below each section title.
+
+BRANDING:
+  The report title ("Microsoft Audit Tracker") and subtitle are in the .hdr
+  block of the here-string.  The CONFIDENTIAL label is in the .cls <div>.
+
+================================================================================

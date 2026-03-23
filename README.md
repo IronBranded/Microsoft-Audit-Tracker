@@ -2,7 +2,7 @@
 Cloud Response & Auditing Utility
 
 **Version: 1.2**
-Creator: M. Decayette (IronBranded)
+** Creator: M. Decayette (IronBranded) **
 
 ---
 

@@ -1,11 +1,8 @@
 # MICROSOFT-AUDIT-TRACKER (MAT)
 Cloud Response & Auditing Utility
 
-**Version: 1.3**
+**Version: 1.3**.
 **Creator: M. Decayette (IronBranded)**
-
-<img width="560" height="327" alt="Screenshot 2026-03-24 at 2 14 37 PM" src="https://github.com/user-attachments/assets/6ab3e5d3-c1b3-4270-a4bd-2150f75c10ee" />
-
 
 ---
 
